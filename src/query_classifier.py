@@ -106,6 +106,7 @@ class QueryClassifier:
         
         # Patterns indicating a math problem
         problem_patterns = [
+            # English patterns
             r'solve',
             r'calculate',
             r'find the value',
@@ -119,10 +120,41 @@ class QueryClassifier:
             r'perimeter of',
             r'sum of',
             r'product of',
+            r'how many',
+            r'how much',
+            r'what is the',
+            r'total',
+            r'ratio',
+            r'proportion',
+            
+            # Percentage patterns (works for any language)
+            r'\d+\s*%',  # Numbers with percentage symbol
+            r'\d+\s*percent',
+            r'\d+\s*சதவீதம்',  # Tamil percentage
+            
+            # Unit patterns (quantity problems)
+            r'\d+\s*grams?',
+            r'\d+\s*kg',
+            r'\d+\s*cm',
+            r'\d+\s*meters?',
+            r'\d+\s*கிராம்',  # Tamil grams
+            r'\d+\s*கிலோ',  # Tamil kilo
+            r'\d+\s*மீட்டர்',  # Tamil meter
+            r'\d+\s*செமீ',  # Tamil cm
+            
             # Tamil math problem indicators
-            r'கணக்கிடு',
-            r'தீர்க்க',
-            r'கண்டுபிடி',
+            r'கணக்கிடு',  # Calculate
+            r'தீர்க்க',  # Solve
+            r'கண்டுபிடி',  # Find
+            r'எத்தனை',  # How many/much
+            r'எவ்வளவு',  # How much
+            r'மொத்தம்',  # Total
+            r'தேவைப்படும்',  # Required/needed
+            r'அளவு',  # Quantity/amount
+            r'கலவை',  # Mixture
+            r'விகிதம்',  # Ratio
+            r'சதவீதம்',  # Percentage
+            r'பெற',  # To get/obtain
         ]
         
         return any(re.search(pattern, query_lower) for pattern in problem_patterns)

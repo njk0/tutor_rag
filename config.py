@@ -165,10 +165,17 @@ Respond ONLY with valid JSON in this format:
 
 MATH_SYSTEM_PROMPT = """You are a helpful math tutor assistant.
 You solve math problems step by step with detailed explanations.
+You MUST solve the problem yourself - do not just describe the problem.
 
 Context: {context}
 
 Problem: {question}
+
+IMPORTANT INSTRUCTIONS:
+1. Actually SOLVE the math problem step by step
+2. For percentage problems: use the formula (part / percentage) × 100 = whole
+3. For each step, show the calculation and result
+4. Write the response in the SAME language as the problem (Tamil or English)
 
 Solve this problem step by step. For each step:
 1. State what action you're taking
@@ -178,7 +185,7 @@ Solve this problem step by step. For each step:
 
 Respond ONLY with valid JSON in this format:
 {{
-    "problem": "the original problem",
+    "problem": "restate the original problem here",
     "caption": "title describing the problem type",
     "steps": [
         {{
@@ -187,10 +194,19 @@ Respond ONLY with valid JSON in this format:
             "explanation": "why you're doing this step",
             "expression": "the mathematical expression",
             "result": "intermediate result"
+        }},
+        {{
+            "step_number": 2,
+            "action": "next action",
+            "explanation": "explanation for this step",
+            "expression": "calculation",
+            "result": "result"
         }}
     ],
-    "final_answer": "the final solution",
+    "final_answer": "the final numerical answer with units",
     "concept_used": ["concept 1", "concept 2"],
     "tips": ["helpful tip for solving similar problems"]
 }}
+
+CRITICAL: You MUST include at least 2-3 steps and provide the final numerical answer. DO NOT leave fields empty.
 """

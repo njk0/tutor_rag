@@ -13,8 +13,38 @@ class LanguageDetector:
     TAMIL_RANGE_START = 0x0B80
     TAMIL_RANGE_END = 0x0BFF
     
+    # Phrases that indicate user wants Tamil response
+    TAMIL_REQUEST_PHRASES = [
+        'in tamil',
+        'explain in tamil',
+        'answer in tamil',
+        'respond in tamil',
+        'reply in tamil',
+        'tell in tamil',
+        'describe in tamil',
+        'தமிழில்',  # "in Tamil" in Tamil
+        'தமிழில் விளக்கு',  # "explain in Tamil" in Tamil
+        'தமிழில் சொல்',  # "tell in Tamil" in Tamil
+    ]
+    
     def __init__(self):
         pass
+    
+    def _check_tamil_request(self, text: str) -> bool:
+        """
+        Check if the text contains phrases requesting Tamil response.
+        
+        Args:
+            text: Text to check
+            
+        Returns:
+            True if user is requesting Tamil response
+        """
+        text_lower = text.lower()
+        for phrase in self.TAMIL_REQUEST_PHRASES:
+            if phrase.lower() in text_lower:
+                return True
+        return False
     
     def detect(self, text: str) -> str:
         """
@@ -26,6 +56,10 @@ class LanguageDetector:
         Returns:
             'Tamil' or 'English'
         """
+        # First check if user explicitly requests Tamil response
+        if self._check_tamil_request(text):
+            return "Tamil"
+        
         tamil_chars = 0
         english_chars = 0
         
@@ -76,6 +110,10 @@ class LanguageDetector:
         Returns:
             Tuple of (detected_language, tamil_ratio, english_ratio)
         """
+        # First check if user explicitly requests Tamil response
+        if self._check_tamil_request(text):
+            return "Tamil", 1.0, 0.0
+        
         tamil_chars = 0
         english_chars = 0
         

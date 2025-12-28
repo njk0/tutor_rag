@@ -11,11 +11,13 @@ class MetadataExtractor:
     """Extracts metadata from filenames and content."""
     
     # Filename patterns for subject extraction
+    # IMPORTANT: Social_Science must be checked BEFORE Science to avoid 
+    # incorrect matches (e.g., "Social_Science" contains "Science")
     SUBJECT_PATTERNS = {
+        "Social_Science": [r"Social[_\s]?Science", r"social[_\s]?science"],
         "Science": [r"Science", r"science"],
         "Maths": [r"Maths", r"Math", r"maths", r"math"],
         "English": [r"English", r"english"],
-        "Social_Science": [r"Social[_\s]?Science", r"social[_\s]?science"],
         "Tamil": [r"Tamil", r"tamil"]
     }
     

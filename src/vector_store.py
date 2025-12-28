@@ -88,7 +88,7 @@ class VectorStore:
                 return np.zeros(self.embedding_dim, dtype=np.float32)
             raise
     
-    def get_embeddings_batch(self, texts: List[str], batch_size: int = 32) -> np.ndarray:
+    def get_embeddings_batch(self, texts: List[str], batch_size: int = 64) -> np.ndarray:
         """
         Get embeddings for multiple texts.
         

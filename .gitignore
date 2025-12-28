@@ -21,11 +21,13 @@ __pycache__/
 Thumbs.db
 
 # Logs
-logs/
 *.log
 
 # Vector stores (can be regenerated)
 vector_stores/
+
+# Data folder - INCLUDE in repo (don't ignore)
+# data/
 
 # Byte-compiled / optimized / DLL files
 *.so
